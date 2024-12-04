@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>OpenStreetMap with Leaflet</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map
+        {
+            height: 100vh;
+            width: 100%
+        }
+        /*강제 다크모드
+        .leaflet-tile
+        {
+            filter: invert(100%) hue-rotate(180deg);
+        }*/
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var defaultLat = 37.5665;
+        var defaultLon = 126.9780;
+
+        var map = L.map('map').setView([defaultLat, defaultLon], 15); // 기본 서울 위치
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        var centerMarker = L.circleMarker([defaultLat, defaultLon], {
+            radius: 10, // 반지름 (픽셀)
+            fillColor: '#ff0000',
+            fillOpacity: 0.5,
+            stroke: false
+        }).addTo(map);
+        var acurrancyMarker = L.circle([defaultLat, defaultLon], {
+            radius: accurancy,  // 반지름 (미터)
+            fillColor: '#ff0000',
+            fillOpacity: 0.25,
+            stroke: false
+        }).addTo(map);
+
+        map.panTo([lat, lon]);
+
+        function updateMap(lat, lon, accurancy) {
+            map.setView([lat, lon], map.getZoom(), {
+                duration: 0.5,
+                animate: true,
+                easeLinearity: 0.25
+            });
+            centerMarker.setLatLng([lat, lon]);
+            acurrancyMarker.setLatLng([lat, lon]);
+
+        }
+    </script>
+</body>
+</html>

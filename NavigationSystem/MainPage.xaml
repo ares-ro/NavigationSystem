@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NavigationSystem.MainPage">
+
+    <Grid Padding="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Label x:Name="dataShow"
+               Text="위치 정보: "
+               
+               Grid.Row="0" />
+
+        <Image
+            BackgroundColor="Black"
+            Grid.Row="1"
+            />
+
+        <WebView x:Name="webView"
+                 Grid.Row="2"/>
+    </Grid>
+
+</ContentPage>
