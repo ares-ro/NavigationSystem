@@ -11,5 +11,12 @@
         {
             return new Window(new AppShell());
         }
+
+        protected override void OnSleep()
+        {
+            base.OnSleep();
+
+            Geolocation.StopListeningForeground();
+        }
     }
 }

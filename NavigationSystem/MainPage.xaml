@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="NavigationSystem.MainPage">
+             x:Class="NavigationSystem.MainPage"
+             BackgroundColor="Black"
+             Shell.NavBarIsVisible="False">
 
     <Grid Padding="10">
         <Grid.RowDefinitions>
@@ -12,13 +14,20 @@
 
         <Label x:Name="dataShow"
                Text="위치 정보: "
-               
-               Grid.Row="0" />
+               Grid.Row="0"
+               TextColor="White"
+               FontSize="10"/>
 
-        <Image
-            BackgroundColor="Black"
-            Grid.Row="1"
-            />
+        <AbsoluteLayout Grid.Row="1">
+            <Image AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1"
+                   AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+                   BackgroundColor="White"/>
+            <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0.5, 50, 1"
+                         AbsoluteLayout.LayoutFlags="PositionProportional, HeightProportional"
+                         BackgroundColor="Black">
+                <Label x:Name="heading" Text="100" TextColor="#FFFFFF" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center"/>
+            </StackLayout>
+        </AbsoluteLayout>
 
         <WebView x:Name="webView"
                  Grid.Row="2"/>

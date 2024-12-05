@@ -4,16 +4,28 @@
     <title>OpenStreetMap with Leaflet</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
+        html, body
+        {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
         #map
         {
             height: 100vh;
-            width: 100%
+            width: 100%;
+            background-color: black;
         }
-        /*강제 다크모드
+        
         .leaflet-tile
         {
             filter: invert(100%) hue-rotate(180deg);
-        }*/
+        }
+        .leaflet-tile-container
+        {
+            background-color: black;
+        }
     </style>
 </head>
 <body>
@@ -30,15 +42,15 @@
         }).addTo(map);
 
         var centerMarker = L.circleMarker([defaultLat, defaultLon], {
-            radius: 10, // 반지름 (픽셀)
-            fillColor: '#ff0000',
-            fillOpacity: 0.5,
+            radius: 0, // 반지름 (픽셀)
+            fillColor: '#FF0000',
+            fillOpacity: 0.3,
             stroke: false
         }).addTo(map);
         var acurrancyMarker = L.circle([defaultLat, defaultLon], {
-            radius: accurancy,  // 반지름 (미터)
-            fillColor: '#ff0000',
-            fillOpacity: 0.25,
+            radius: 0,  // 반지름 (미터)
+            fillColor: '#FF0000',
+            fillOpacity: 0.15,
             stroke: false
         }).addTo(map);
 
@@ -51,8 +63,10 @@
                 easeLinearity: 0.25
             });
             centerMarker.setLatLng([lat, lon]);
-            acurrancyMarker.setLatLng([lat, lon]);
+            centerMarker.setRadius(10);
 
+            acurrancyMarker.setLatLng([lat, lon]);
+            acurrancyMarker.setRadius(100);
         }
     </script>
 </body>
