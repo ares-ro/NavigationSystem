@@ -13,7 +13,7 @@
         }
         #map
         {
-            height: 100vh;
+            height: 100%;
             width: 100%;
             background-color: black;
         }
@@ -26,6 +26,10 @@
         {
             background-color: black;
         }
+        .leaflet-control-attribution
+        {
+            background-color: rgb(255, 255, 255, 0.3) !important;
+        }
     </style>
 </head>
 <body>
@@ -36,10 +40,11 @@
         var defaultLon = 126.9780;
 
         var map = L.map('map').setView([defaultLat, defaultLon], 15); // 기본 서울 위치
-
+        map.zoomControl.remove();
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
+        //map.attributionControl.setPosition('bottomright'); 우하단이 기본값
 
         var centerMarker = L.circleMarker([defaultLat, defaultLon], {
             radius: 0, // 반지름 (픽셀)
@@ -47,6 +52,7 @@
             fillOpacity: 0.3,
             stroke: false
         }).addTo(map);
+
         var acurrancyMarker = L.circle([defaultLat, defaultLon], {
             radius: 0,  // 반지름 (미터)
             fillColor: '#FF0000',

@@ -34,20 +34,20 @@ namespace NavigationSystem
 
             //위치 이벤트, 종료될 때 해제해야함
             Geolocation.LocationChanged += LocationChanged;
-            var request = new GeolocationListeningRequest(GeolocationAccuracy.High, TimeSpan.FromSeconds(1));
+            var request = new GeolocationListeningRequest(GeolocationAccuracy.Best);
             await Geolocation.StartListeningForegroundAsync(request);
 
             //방위 이벤트
             if (Compass.IsSupported && !Compass.IsMonitoring)
             {
                 Compass.ReadingChanged += CompassReadingChanged;
-                Compass.Start(SensorSpeed.Fastest); // SensorSpeed 설정
+                Compass.Start(SensorSpeed.Fastest);
             }
         }
 
         private void CompassReadingChanged(object? sender, CompassChangedEventArgs e)
         {
-            heading.Text = MathF.Round((float)e.Reading.HeadingMagneticNorth).ToString() + "";
+            heading.Text = MathF.Round((float)e.Reading.HeadingMagneticNorth).ToString();
         }
 
         private async void LocationChanged(object? sender, GeolocationLocationChangedEventArgs e)
@@ -77,9 +77,13 @@ namespace NavigationSystem
 
                 dataShow.Text = data;
 
+                if (speed != null)
+                {
+                    speedShow.Text = MathF.Round((float)(speed * 3600 / 1000)) + "km/h";
+                }
 
 
-
+                //지도 업데이트
                 string script = $"updateMap({latitude}, {longitude}, {horiziontalAccurancy});";
                 await webView.EvaluateJavaScriptAsync(script);
             }

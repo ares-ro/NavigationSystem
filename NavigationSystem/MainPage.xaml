@@ -5,32 +5,109 @@
              BackgroundColor="Black"
              Shell.NavBarIsVisible="False">
 
-    <Grid Padding="10">
+    <Grid Padding="10"
+          RowSpacing="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="30" />
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <Label x:Name="dataShow"
-               Text="위치 정보: "
-               Grid.Row="0"
-               TextColor="White"
-               FontSize="10"/>
-
+        <Border Grid.Row="0"
+                StrokeThickness="2"
+                Stroke="#40C0FF"
+                Padding="5">
+            <Label x:Name="dataShow"
+                   Text="위치 정보: "
+                   TextColor="White"
+                   FontSize="10"
+                   FontFamily="gct_Light"/>
+        </Border>
         <AbsoluteLayout Grid.Row="1">
-            <Image AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1"
-                   AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
-                   BackgroundColor="White"/>
-            <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0.5, 50, 1"
-                         AbsoluteLayout.LayoutFlags="PositionProportional, HeightProportional"
-                         BackgroundColor="Black">
-                <Label x:Name="heading" Text="100" TextColor="#FFFFFF" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center"/>
-            </StackLayout>
+            <Border AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+                    AbsoluteLayout.LayoutFlags="All"
+                    StrokeThickness="2"
+                    Stroke="#40C0FF">
+                <WebView x:Name="webView"/>
+            </Border>
+            <AbsoluteLayout AbsoluteLayout.LayoutBounds="0,15,1,25"
+                            AbsoluteLayout.LayoutFlags="WidthProportional" >
+                <BoxView Color="#40C0FF"
+                         Opacity="0.2"
+                         AbsoluteLayout.LayoutBounds="0, 0.5, 0.425, 1"
+                         AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional" />
+                <BoxView AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.15, 25"
+                         AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+                         Color="#40C0FF"
+                         Opacity="0.2"/>
+                <BoxView Color="#40C0FF"
+                             Opacity="0.2"
+                             AbsoluteLayout.LayoutBounds="1, 0.5, 0.425, 1"
+                             AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional" />
+                <Label x:Name="heading"
+                           FontFamily="gct_Light"
+                           AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 25"
+                           AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+                           Text="100"
+                           TextColor="#FFFFFF"
+                           Opacity="0.8"
+                           HorizontalOptions="Center"
+                           VerticalOptions="CenterAndExpand"
+                           VerticalTextAlignment="Center"/>
+            </AbsoluteLayout>
+
+            <Label x:Name="speedShow"
+                       Padding="10"
+                       Text="100"
+                       FontSize="25"
+                       FontFamily="gct_Light"
+                       TextColor="#FFFFFF"
+                       Opacity="0.8"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="End"
+                       VerticalTextAlignment="Center"
+                       AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+                       AbsoluteLayout.LayoutFlags="All"/>
         </AbsoluteLayout>
-
-        <WebView x:Name="webView"
-                 Grid.Row="2"/>
+        <StackLayout Grid.Row="2" Spacing="10">
+            <HorizontalStackLayout HeightRequest="40"
+                                   Spacing="-3">
+                <Border WidthRequest="120"
+                        StrokeThickness="2"
+                        Stroke="#40C0FF"
+                        Padding="0"
+                        Margin="0">
+                    <AbsoluteLayout HorizontalOptions="Fill" VerticalOptions="Fill">
+                        <Image AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+                               AbsoluteLayout.LayoutFlags="All"
+                               BackgroundColor="#40C0FF"
+                               Opacity="0.2"/>
+                        <Label AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+                               AbsoluteLayout.LayoutFlags="All"
+                               TextColor="White"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center"
+                               Text="위도 | 37.4219
+                               경도 | 122.084"
+                               FontFamily="gct_Light"/>
+                    </AbsoluteLayout>
+                </Border>
+                <Border WidthRequest="40"
+                        StrokeThickness="2"
+                        Stroke="#40C0FF"
+                        Padding="0"
+                        Margin="0">
+                    <Button BackgroundColor="#40C0FF"
+                            Opacity="0.2"
+                            CornerRadius="0"/>
+                </Border>
+            </HorizontalStackLayout>
+        </StackLayout>
     </Grid>
-
 </ContentPage>
+
+<!-- 
+반투명 자주 풀림, 지웠다가 다시 입력해야 적용됨
+핫리로드 문제인지 일부 속성 적용이 안될 때 있음. rectangle 색상 적용, border의 padding 적용 및 일부 상황에서도 랜덤하게 발생
+grid 사이 빈공간 문제, border padding 적용이 uwp에선 되지만 안드로이드에선 안됨
+-->
